@@ -1,0 +1,86 @@
+[
+   {
+      "Cota": "WQWE4321",
+      "Nombre": "Monalisa",
+      "Precio": "33",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   },
+   {
+      "Cota": "QWER1234",
+      "Nombre": "La ultima cena",
+      "Precio": "99",
+      "Status": "EN EXHIBICION",
+      "Deleted": true
+   },
+   {
+      "Cota": "WERT6789",
+      "Nombre": "El beso",
+      "Precio": "90",
+      "Status": "EN EXHIBICION",
+      "Deleted": true
+   },
+   {
+      "Cota": "LKOI8900",
+      "Nombre": "Las meninas",
+      "Precio": "7",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   },
+   {
+      "Cota": "HGJG4321",
+      "Nombre": "La joven de perla",
+      "Precio": "2",
+      "Status": "EN MANTENIMIENTO",
+      "Deleted": false
+   },
+   {
+      "Cota": "TYUI4321",
+      "Nombre": "Las personas sanas",
+      "Precio": "90",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   },
+   {
+      "Cota": "OIUP1009",
+      "Nombre": "Naranja",
+      "Precio": "44",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   },
+   {
+      "Cota": "TRYU5869",
+      "Nombre": "Hola ",
+      "Precio": "66",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   },
+   {
+      "Cota": "CBVN5839",
+      "Nombre": "Germany",
+      "Precio": "90",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   },
+   {
+      "Cota": "URYT8594",
+      "Nombre": "Jijijija",
+      "Precio": "900",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   },
+   {
+      "Cota": "QWER4321",
+      "Nombre": "T",
+      "Precio": "5",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   },
+   {
+      "Cota": "ABCD1234",
+      "Nombre": "La gran obra",
+      "Precio": "555",
+      "Status": "EN EXHIBICION",
+      "Deleted": false
+   }
+]
