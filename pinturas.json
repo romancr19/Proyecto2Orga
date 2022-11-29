@@ -7,20 +7,6 @@
       "Deleted": false
    },
    {
-      "Cota": "QWER1234",
-      "Nombre": "La ultima cena",
-      "Precio": "99",
-      "Status": "EN EXHIBICION",
-      "Deleted": true
-   },
-   {
-      "Cota": "WERT6789",
-      "Nombre": "El beso",
-      "Precio": "90",
-      "Status": "EN EXHIBICION",
-      "Deleted": true
-   },
-   {
       "Cota": "LKOI8900",
       "Nombre": "Las meninas",
       "Precio": "7",
@@ -32,13 +18,6 @@
       "Nombre": "La joven de perla",
       "Precio": "2",
       "Status": "EN MANTENIMIENTO",
-      "Deleted": false
-   },
-   {
-      "Cota": "TYUI4321",
-      "Nombre": "Las personas sanas",
-      "Precio": "90",
-      "Status": "EN EXHIBICION",
       "Deleted": false
    },
    {

@@ -1,24 +1,27 @@
 import json
 
-# Aca se almacena en una variable lo contenido en el json
-
 def cargarDelJson():
     with open("pinturas.json", "r") as f:
         jsonString = f.read()
+        f.close()
         return json.loads(jsonString)
 
-#Se pone la 1era letra mayuscula de cada nombre de las pinturas    
+def guardarJson(pinturas):
+    guardar = json.dumps(pinturas, indent= "   ")
+    with open("pinturas.json", 'w') as f:
+        f.write(guardar)
+        f.close()
+    return
 
-def nombresCapitalizados():
-    global listaPinturas
+#Se pone la 1era letra mayuscula de cada nombre de las pinturas    
+def pinturasCapitalizadas():
     listaPinturas = cargarDelJson()
     for i in listaPinturas:
         for j in i['Nombre']:
             j.capitalize()
     return listaPinturas
 
-
-def indexCotas():
+def crearIndexCotas(listaPinturas):
     indiceCotas = {}
     indiceCotasOrdenado = {}
     cotas = []
@@ -28,7 +31,7 @@ def indexCotas():
         cotas.append(i['Cota'])
         indiceCotas[i['Cota']] = contador
         contador += 1
-       
+
     cotas.sort()    
 
     for i in cotas:
@@ -38,58 +41,16 @@ def indexCotas():
                 break
 
     tuplaCotas = indiceCotasOrdenado.items()
-    listaCotas = []
-    for i in tuplaCotas:
-        listaCotas.append(list(i))
+    # listaCotas = []
+    # for i in tuplaCotas:
+    #     listaCotas.append(list(i))
 
 #Se retorna un diccionario de cotas ordenados alfabeticamente con su posicion en el vector principal 
 #y en forma de lista    
 
-    return indiceCotasOrdenado, listaCotas
-    
+    return indiceCotasOrdenado
 
-#Se pide que el usuario ingrese un cota
-def elementoIngresado():
-    elemento = input('Ingrese la cota que desea buscar: ')
-    elemento = elemento.upper()
-    return elemento
-
-#Se busca el elemento por busqueda binaria
-def busquedaBinariaCotas(lista,elemento):   
-    x = len(lista)
-    y = x//2
-    z = lista[y][0] 
-    if z == elemento:
-        print('Encontrado')
-        indice = lista[y][1]
-        
-        print(f'''A continuacion, los datos de la pintura con cota "{elemento}":
-{listaPinturas[indice]}''')
-    elif z != elemento and len(lista) <= 1:
-        print('No esta lo que pusiste')   
-    elif len(lista) == 2 and z != elemento:
-        lista2 = lista[0:1]
-        busquedaBinariaCotas(lista2,elemento)  #tupla2,elemento
-    elif elemento > z:
-        lista2 = lista[y:x+1]
-        busquedaBinariaCotas(lista2,elemento)  
-    elif elemento < z:
-        lista2 = lista[0:y+1]
-        busquedaBinariaCotas(lista2,elemento)  
-    else:
-        pass
-
-
-#Se crea una funcion para las cotas que se usara en el archivo del menu
-
-def coticas():
-    b = indexCotas()[1]
-    c = elementoIngresado()
-    busquedaBinariaCotas(b,c)
-
-
-
-def indexNombres(listaPinturas):
+def crearIndexNombres(listaPinturas):
     indiceNombres = {}
     indiceNombresOrdenado = {}
     nombres = []
@@ -99,9 +60,8 @@ def indexNombres(listaPinturas):
         nombres.append(i['Nombre'])
         indiceNombres[i['Nombre']] = contador
         contador += 1
-       
+    
     nombres.sort()    
-
 
     for i in nombres:
         for j in indiceNombres:
@@ -109,75 +69,56 @@ def indexNombres(listaPinturas):
                 indiceNombresOrdenado[i] = indiceNombres[j]
                 break
 
-    tuplaNombres = indiceNombresOrdenado.items()
-    tuplaNombres = tuple(tuplaNombres)
-    listaNombres = []
-    for i in tuplaNombres:
-        listaNombres.append(list(i))
-    return listaNombres
+    # tuplaNombres = indiceNombresOrdenado.items()
+    # tuplaNombres = tuple(tuplaNombres)
+    # listaNombres = []
+    # for i in tuplaNombres:
+    #     listaNombres.append(list(i))
+    return indiceNombresOrdenado
 
+def elementoIngresado():
+    elemento = input('Ingrese el valor que desea buscar: ')
+    print("")
+    
+    return elemento
 
-#Funcion que retorna la lista de nombres pero sin espacios 
+def buscarPorCotas(pinturas, indiceCotas):
+    cota = elementoIngresado()
+    cota = cota.upper()
 
-def nombresSinEspacios(lista):
-    listaSinEspacios = []
-    for i in lista:
-        elem = ''
-        for j in i[0]:
-            if j == ' ':
-                continue
-            else:
-                elem += j
-        agregar = [elem,i[1]]
-        listaSinEspacios.append(agregar)
-    return listaSinEspacios
-        
+    cotas = list(indiceCotas.keys())
+    indice = busquedaBinaria(cotas, cota)
 
-#Realizo la busqueda, NO ME FUNCIONA
+    if indice == -1:
+        print('No se encontro la cota ingresada')
+        return
+    
+    return pinturas[list(indiceCotas.values())[indice]]
 
-def busquedaBinariaNombres(lista,elemento3):   
-    x = len(lista)
-    y = x//2
-    z = lista[y][0] 
+def buscarPorNombre(pinturas, indiceNombres):
+    nombre = elementoIngresado()
 
-    if z == elemento3:
-        print('Encontrado')
-    elif z != elemento3 and len(lista) <= 1:
-        print('No esta lo que pusiste')   
-    elif len(lista) == 2 and z != elemento3:
-        lista2 = lista[0:1]
-        busquedaBinariaNombres(lista2)  
-    elif elemento3 > z:
-        lista2 = lista[y:x+1]
-        busquedaBinariaNombres(lista2)  
-    elif elemento3 < z:
-        lista2 = lista[0:y+1]
-        busquedaBinariaNombres(lista2)  
-    else:
-        pass
+    nombres = list(indiceNombres.keys())
+    indice = busquedaBinaria(nombres, nombre)
 
+    if indice == -1:
+        print('No se encontro la cota ingresada')
+        return
+    
+    return pinturas[list(indiceNombres.values())[indice]]
 
-#Funcion que se utiliza en el archivo Parte34, me esta fallando
+def busquedaBinaria(cotas, target):
+    left = 0
+    right = len(cotas) - 1
 
-def busquedaBinariaCotas3(lista,elemento):   
-    x = len(lista)
-    y = x//2
-    z = lista[y][0] 
-    if z == elemento:
-        indice = lista[y][1]       
-        return listaPinturas[indice], indice
-    elif z != elemento and len(lista) <= 1:
-        return False, False
-    elif len(lista) == 2 and z != elemento:
-        lista2 = lista[0:1]
-        busquedaBinariaCotas3(lista2,elemento)  
-    elif elemento > z:
-        lista2 = lista[y:x+1]
-        busquedaBinariaCotas3(lista2,elemento)  
-    elif elemento < z:
-        lista2 = lista[0:y+1]
-        busquedaBinariaCotas3(lista2,elemento)  
-    else:
-        pass
+    while (left <= right):
+        mid = (right + left) // 2
 
+        if cotas[mid] == target:
+            return mid
+        elif cotas[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
 
+    return -1
