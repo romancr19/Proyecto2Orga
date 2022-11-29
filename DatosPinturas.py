@@ -107,16 +107,16 @@ def buscarPorNombre(pinturas, indiceNombres):
     
     return pinturas[list(indiceNombres.values())[indice]]
 
-def busquedaBinaria(cotas, target):
+def busquedaBinaria(array, target):
     left = 0
-    right = len(cotas) - 1
+    right = len(array) - 1
 
     while (left <= right):
         mid = (right + left) // 2
 
-        if cotas[mid] == target:
+        if array[mid] == target:
             return mid
-        elif cotas[mid] < target:
+        elif array[mid] < target:
             left = mid + 1
         else:
             right = mid - 1

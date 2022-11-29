@@ -28,7 +28,7 @@ Ingrese opcion: ''')
 
         match decision:
             case '1':
-                crearPintura(pinturas)
+                crearPintura(pinturas, indiceNombres, indiceCotas)
 
             case '2':   
                 consultarPintura(pinturas, indiceNombres, indiceCotas)
@@ -50,7 +50,7 @@ Ingrese opcion: ''')
 
         print("")
 
-def crearPintura(pinturas):
+def crearPintura(pinturas, indiceNombres, indiceCotas):
     while True:
         try:
             pintura = {'Cota':'','Nombre':'', 'Precio':'', 'Status':'', 'Deleted': False}
@@ -69,17 +69,22 @@ Recuerde que debe contener 4 numeros y 4 letras: ''')
                 else:
                     pass
                         
-                        #TODO: Verificar que la cota de la pnituraa unico
             if (len(cota) != 8) or (cantidad_digitos != 4 and cantidad_caracteres != 4) or ' ' in cota:
                 raise Exception
-                            
+
+            if busquedaBinaria(list(indiceCotas.keys()), cota) != -1: #Si ya existe la cota, no se puede crear
+                raise Exception
+
             pintura['Cota'] = cota
                         
             nombre = input('Ingrese el nombre de la pintura. Maximo 30 caracteres: ')
-                        #TODO: Verificar que el nombre de la cota sea unico
             if len(nombre)>30:
                 raise Exception
-                        
+            
+            if busquedaBinaria(list(indiceNombres.keys()), nombre) != -1: #Si ya existe el nombre, no se puede crear
+                raise Exception
+            
+                                    
             pintura['Nombre'] = nombre.capitalize()
 
             precio = input('Precio de la obra ($): ')
